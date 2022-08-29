@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        table, tr, td {
+            text-align: center;
+        }
+    </style>
+    <a href="{% url 'home' %}">Back to All Form</a>
+    <br>
+    <a href="edit/">Edit form</a>
+    <br>
+    <a href="{% url 'form_respond' object.pk %}">Respond To Form</a>
+
+    <p>Responses</p>
+    <hr>
+    {% for formresponse in object.formresponse_set.all %}
+        <ul>
+            <table style="width:100%">
+                <tr>
+                    {% for k, v in formresponse.response.items %}
+                        <th>{{ k }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for k, v in formresponse.response.items %}
+                        <td>{{ v }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </ul>
+        <hr>
+    {% endfor %}
+{% endblock %}
